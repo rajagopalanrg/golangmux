@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: books
+  labels:
+    name: books
+spec:
+  containers:
+    - name: booksappcontainer
+      image: golangapps.azurecr.io/golangbooks:v4
+      imagePullPolicy: IfNotPresent
+  imagePullSecrets:
+    - name: dockerlogin
+    

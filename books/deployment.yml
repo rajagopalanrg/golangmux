@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: books
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: books
+  template:
+    metadata:
+      labels:
+        app: books
+    spec:
+      containers:
+      - name: golangbooks
+        image: golangapps.azurecr.io/golangbooks:v4
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: dockerlogin
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: books-service
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+  selector:
+    app: books
